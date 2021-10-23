@@ -1,5 +1,5 @@
 include:
 - "**/lib/*.rb"
 exclude:
-- "**/spec/*"
+- "**/spec/*.rb"
 max_files: 5000
