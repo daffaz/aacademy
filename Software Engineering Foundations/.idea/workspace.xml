@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bcc79ede-35e7-44f8-82a5-79e5d1514a66" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Software Engineering Foundations.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Software Engineering Foundations.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-    </list>
+    <list default="true" id="bcc79ede-35e7-44f8-82a5-79e5d1514a66" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,6 +53,7 @@
       <workItem from="1635079666326" duration="3486000" />
       <workItem from="1635083899880" duration="7000" />
       <workItem from="1635086863741" duration="252000" />
+      <workItem from="1635095074647" duration="14000" />
     </task>
     <servers />
   </component>
