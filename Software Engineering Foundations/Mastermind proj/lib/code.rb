@@ -26,7 +26,7 @@ class Code
   def self.random(length)
     arr = []
     length.times do
-      arr << Code::POSSIBLE_PEGS.keys[2]
+      arr << Code::POSSIBLE_PEGS.keys.sample
     end
     Code.new(arr)
   end
