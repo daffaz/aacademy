@@ -50,6 +50,7 @@ class Board
     end
   end
 
+  # @return [Array]
   def hidden_ships_grid
     res = Array.new(grid.length) { Array.new([]) }
     grid.each_with_index do |sub_arr, i|
@@ -64,7 +65,18 @@ class Board
     res
   end
 
-  def print_grid
-    
+  # @param [Array] grid
+  def self.print_grid(grid)
+    grid.each do |row|
+      print row.join(' ') + "\n"
+    end
+  end
+
+  def cheat
+    Board.print_grid(grid)
+  end
+
+  def print
+    Board.print_grid(hidden_ships_grid)
   end
 end
