@@ -308,7 +308,9 @@ def procipher(sentence, cipher)
     new_words = words.map do |word|
         new_word = word
         cipher.each do |checker, changer|
-            new_word = changer.call(new_word) if checker.call(word)
+            if checker.call(word)
+                new_word = changer.call(new_word)
+            end
         end
         new_word
     end
