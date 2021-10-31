@@ -59,7 +59,7 @@ end
 def counted_characters(str)
   hash = Hash.new(0)
   str.each_char { |char| hash[char] += 1 }
-  hash.select { |k, v| v > 2 }.keys
+  hash.select { |_k, v| v > 2 }.keys
 end
 
 # p counted_characters("that's alright folks") # ["t"]
@@ -193,7 +193,127 @@ def reverberate(str)
   new_str.join(' ')
 end
 
-p reverberate('We like to go running fast') # "We likelike to go runninging fastast"
-p reverberate('He cannot find the trash') # "He cannotot findind thethe trashash"
-p reverberate('Pasta is my favorite dish') # "Pastapasta is my favoritefavorite dishish"
-p reverberate('Her family flew to France') # "Herer familyily flewew to Francefrance"
+# p reverberate('We like to go running fast') # "We likelike to go runninging fastast"
+# p reverberate('He cannot find the trash') # "He cannotot findind thethe trashash"
+# p reverberate('Pasta is my favorite dish') # "Pastapasta is my favoritefavorite dishish"
+# p reverberate('Her family flew to France') # "Herer familyily flewew to Francefrance"ar
+
+def disjunct_select(arr, *prcs)
+  new_arr = []
+  arr.each { |item| new_arr << item if prcs.any? { |prc| prc.call(item) } }
+
+  new_arr
+end
+
+# longer_four = Proc.new { |s| s.length > 4 }
+# contains_o = Proc.new { |s| s.include?('o') }
+# starts_a = Proc.new { |s| s[0] == 'a' }
+#
+# p disjunct_select(['ace', 'dog', 'apple', 'teeming', 'boot', 'zip'],
+#                   longer_four,
+#                   ) # ["apple", "teeming"]
+#
+# p disjunct_select(['ace', 'dog', 'apple', 'teeming', 'boot', 'zip'],
+#                   longer_four,
+#                   contains_o
+#   ) # ["dog", "apple", "teeming", "boot"]
+#
+# p disjunct_select(['ace', 'dog', 'apple', 'teeming', 'boot', 'zip'],
+#                   longer_four,
+#                   contains_o,
+#                   starts_a
+#   ) # ["ace", "dog", "apple", "teeming", "boot"]
+
+def alternating_vowel(str)
+  vowels = 'aiueo'
+  new_str = []
+  str.split.each_with_index do |word, i|
+    new_word = word
+    if i.odd?
+      i = word.length - 1
+      while i >= 0
+        if vowels.include?(word[i])
+          new_word = word[0...i] + word[i + 1..-1]
+          break
+        end
+        i -= 1
+      end
+    else
+      i = 0
+      while i < word.length
+        if vowels.include?(word[i])
+          new_word = word[0...i] + word[i + 1..-1]
+          break
+        end
+        i += 1
+      end
+    end
+    new_str << new_word
+  end
+
+  new_str.join(' ')
+end
+
+# p alternating_vowel('panthers are great animals') # "pnthers ar grat animls"
+# p alternating_vowel('running panthers are epic') # "rnning panthrs re epc"
+# p alternating_vowel('code properly please') # "cde proprly plase"
+# p alternating_vowel('my forecast predicts rain today') # "my forecst prdicts ran tday"
+
+# @param [String] word
+def silly_not_end_vowels(word)
+  vowels = 'AIUEOaiueo'
+  new_str = ''
+  word.each_char do |char|
+    new_str += if vowels.include?(char)
+                 "#{char}b#{char.downcase}"
+               else
+                 char
+               end
+  end
+  new_str
+end
+
+# @param [String] str
+def silly_talk(str)
+  result_str = []
+  vowels = 'aiueo'
+  str.split.each do |word|
+    result_str << if vowels.include?(word[-1])
+                    word + word[-1]
+                  else
+                    silly_not_end_vowels(word)
+                  end
+  end
+  result_str.join(' ')
+end
+
+# p silly_talk('Kids like cats and dogs') # "Kibids likee cabats aband dobogs"
+# p silly_talk('Stop that scooter') # "Stobop thabat scobooboteber"
+# p silly_talk('They can code') # "Thebey caban codee"
+# p silly_talk('He flew to Italy') # "Hee flebew too Ibitabaly"
+
+
+# @param [String] str
+def compress(str)
+  new_str = ''
+  i = 0
+  while i < str.length
+    count = 1
+    j = i + 1
+    while str[i] == str[j]
+      count += 1
+      j += 1
+    end
+    new_str += if count == 1
+                 str[i]
+               else
+                 str[i] + count.to_s
+               end
+    i += count
+  end
+  new_str
+end
+
+p compress('aabbbbc')   # "a2b4c"
+p compress('boot')      # "bo2t"
+p compress('xxxyxxzzzz')# "x3yx2z4"
