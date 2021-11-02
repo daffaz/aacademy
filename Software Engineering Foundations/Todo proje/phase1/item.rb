@@ -9,6 +9,7 @@ class Item
 
   attr_reader :deadline
   attr_accessor :title, :description
+
   def initialize(title, deadline, description)
     @title = title
     @description = description
