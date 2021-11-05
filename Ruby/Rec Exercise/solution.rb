@@ -35,6 +35,26 @@ class Array
     end
     new_arr
   end
+
+  def merge_sort
+    return self if self.length < 2
+
+    middle = self.length / 2
+    left, right = self.take(middle), self.drop(middle)
+    sorted_left, sorted_right = left.merge_sort, right.merge_sort
+
+    merge(sorted_left, sorted_right)
+  end
+
+  # @param [Array] left
+  # @param [Array] right
+  def merge(left, right)
+    merged = []
+    until left.empty? || right.empty?
+      merged << ((left.first < right.first) ? left.shift : right.shift)
+    end
+    merged + left + right
+  end
 end
 
 def iter_fibo(n)
@@ -64,12 +84,22 @@ def bsearch(arr, key)
   return nil if arr.empty?
 
   middle = arr.length / 2
+
   case key <=> arr[middle]
   when -1
-    bsearch(arr[0...middle], key)
+    bsearch(arr.take(middle), key)
   when 0
     middle
   when 1
-    bsearch(arr[(middle + 1)..-1], key)
+    sub_arr = bsearch(arr.drop(middle + 1), key)
+    sub_arr.nil? ? nil : (middle + 1) + sub_arr
   end
+end
+
+# @param [Array] arr
+def subsets(arr)
+  return [[]] if arr.length.zero?
+
+  subs = subsets(arr.take(arr.count - 1))
+  subs.concat(subs.map { |ele| ele + [arr.last] })
 end
