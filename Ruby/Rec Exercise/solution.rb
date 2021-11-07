@@ -103,3 +103,7 @@ def subsets(arr)
   subs = subsets(arr.take(arr.count - 1))
   subs.concat(subs.map { |ele| ele + [arr.last] })
 end
+
+def make_change(n, coins = [25, 10, 5, 1])
+  
+end
