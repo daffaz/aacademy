@@ -33,7 +33,20 @@ def okay_two_sum(arr, target)
   false
 end
 
+def two_sum(arr, target)
+  hash = {}
+
+  arr.each do |ele|
+    return true if hash[target - ele]
+
+    hash[ele] = true
+  end
+
+  false
+end
+
 arr = [0, 1, 5, 7]
 # sorted = [0, 1, 5, 7]
-p okay_two_sum(arr, 6)
-p okay_two_sum(arr, 10)
+# {0 => true, 1 => true, 5 => true, 7 => true}
+p two_sum(arr, 6)
+p two_sum(arr, 10)
