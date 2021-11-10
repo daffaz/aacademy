@@ -37,11 +37,36 @@ def second_anagram(str1, str2)
 end
 
 def third_anagram(str1, str2)
-  sorted1 = str1.split('').sort
-  sorted2 = str2.split('').sort
+  sorted = [str1, str2].map do |str|
+    str.split('').sort.join
+  end
 
-  sorted1 == sorted2
+  sorted.first == sorted.last
 end
 
-p third_anagram('gizmo', 'sally')    #=> false
-p third_anagram('elvis', 'lives')    #=> true
+# p third_anagram('gizmo', 'sally')    #=> false
+# p third_anagram('elvis', 'lives')    #=> true
+
+def fourth_anagram(str1, str2)
+  hash1 = Hash.new(0)
+  hash2 = Hash.new(0)
+
+  str1.split('').each_index do |i|
+    hash1[str1[i]] += 1
+    hash2[str2[i]] += 1
+  end
+
+  hash1 == hash2
+end
+
+def fourth_anagram_one_hash(str1, str2)
+  letter_sums = Hash.new(0)
+
+  str1.each_char { |char| letter_sums[char] += 1 }
+  str2.each_char { |char| letter_sums[char] -= 1 }
+
+  letter_sums.each_value.all? { |sum| sum == 0 }
+end
+
+p fourth_anagram_one_hash('gizmo', 'sally')    #=> false
+p fourth_anagram_one_hash('elvis', 'lives')    #=> true
